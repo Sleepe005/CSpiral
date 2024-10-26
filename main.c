@@ -26,6 +26,38 @@ void printMenu(int cursePosition){
     }
 }
 
+bool isSample(char val[4]){
+    bool sample = true;
+
+    // Проверяем, что число двухзначное
+    if(strlen(val) > 2){
+        sample = false;
+    }
+
+    // Проверяем, что строка содержит только цифры
+    for(int i = 0; i < strlen(val); i++){
+        if(!isdigit(val[i])){
+            sample = false;
+        }
+    }
+
+    return sample;
+}
+
+bool getValue(int* val){
+    // Читаем строку
+    char buf[4];
+    scanw("%3s", buf);  
+
+    if(isSample(buf)){
+        // Преобразуем строку в число
+        *val = atoi(buf); 
+        return true;
+    }else{
+        return false;
+    }
+}
+
 int main(){
     setlocale(LC_ALL, "");
     initscr();
