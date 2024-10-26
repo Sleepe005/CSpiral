@@ -6,7 +6,7 @@
 #include <unistd.h>
 #include <string.h>
 
-void printMenu(int cursePosition){
+void printMenu(int cursePosition, bool isValN, int valN, bool isValM, int valM){
     char menu[7][75] = {
         "1. Ввод N",
         "2. Ввод M",
@@ -19,6 +19,12 @@ void printMenu(int cursePosition){
 
     for(int i = 1; i <= 7; i++){
         printw("%s", menu[i-1]);
+        if(isValN && i == 1){
+            printw("   %d", valN);
+        }
+        if(isValM && i == 2){
+            printw("   %d", valM);
+        }
         if(i == cursePosition){
             printw("    <--");
         }
@@ -45,9 +51,11 @@ bool isSample(char val[4]){
 }
 
 bool getValue(int* val){
+    printw("Введите число: ");
+
     // Читаем строку
     char buf[4];
-    scanw("%3s", buf);  
+    scanw("%3s\n", buf);  
 
     if(isSample(buf)){
         // Преобразуем строку в число
@@ -55,6 +63,40 @@ bool getValue(int* val){
         return true;
     }else{
         return false;
+    }
+}
+
+void doSomething(int doing, int* valN, bool* isValN, int* valM, bool* isValM){
+    switch (doing)
+    {
+    case 1:
+        clear();
+        bool getVal1 = getValue(valN);
+        while (!getVal1)
+        {
+            clear();
+            printw("Неверный форма входных данных\n");
+            getVal1 = getValue(valN);
+        }
+
+        *isValN = true;
+        
+        break;
+    
+    case 2:
+        clear();
+        bool getVal2 = getValue(valM);
+        while (!getVal2)
+        {
+            clear();
+            printw("Неверный форма входных данных\n");
+            getVal2 = getValue(valM);
+        }
+
+        *isValM = true;
+    
+    default:
+        break;
     }
 }
 
@@ -66,9 +108,11 @@ int main(){
     bool wantExit = false;
 
     int cursePosition = 1;
+    int valN, valM;
+    bool isValN = false, isValM = false;
 
     while(!wantExit){
-        printMenu(cursePosition);
+        printMenu(cursePosition, isValN, valN, isValM, valM);
 
         key = getch();
         if(key == 27){
@@ -91,20 +135,29 @@ int main(){
             if (key == 27){
                 wantExit = true;
             }
+        }else if(key == 10){
+            doSomething(cursePosition, &valN, &isValN, &valM, &isValM);
         }else if(key == 49){
             cursePosition = 1;
+            doSomething(cursePosition, &valN, &isValN, &valM, &isValM);
         }else if(key == 50){
             cursePosition = 2;
+            doSomething(cursePosition, &valN, &isValN, &valM, &isValM);
         }else if(key == 51){
             cursePosition = 3;
+            doSomething(cursePosition, &valN, &isValN, &valM, &isValM);
         }else if(key == 52){
             cursePosition = 4;
+           doSomething(cursePosition, &valN, &isValN, &valM, &isValM);
         }else if(key == 53){
             cursePosition = 5;
+            doSomething(cursePosition, &valN, &isValN, &valM, &isValM);
         }else if(key == 54){
             cursePosition = 6;
+            doSomething(cursePosition, &valN, &isValN, &valM, &isValM);
         }else if(key == 55){
             cursePosition = 7;
+            doSomething(cursePosition, &valN, &isValN, &valM, &isValM);
         }
 
         clear();
