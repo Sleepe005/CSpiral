@@ -59,6 +59,20 @@ int main(){
             if (key == 27){
                 wantExit = true;
             }
+        }else if(key == 49){
+            cursePosition = 1;
+        }else if(key == 50){
+            cursePosition = 2;
+        }else if(key == 51){
+            cursePosition = 3;
+        }else if(key == 52){
+            cursePosition = 4;
+        }else if(key == 53){
+            cursePosition = 5;
+        }else if(key == 54){
+            cursePosition = 6;
+        }else if(key == 55){
+            cursePosition = 7;
         }
 
         clear();
