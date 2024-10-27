@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include <math.h>
 
 void printMenu(int cursePosition, bool isValN, int valN, bool isValM, int valM){
     char menu[7][75] = {
@@ -94,7 +95,283 @@ void doSomething(int doing, int* valN, bool* isValN, int* valM, bool* isValM){
         }
 
         *isValM = true;
+
+        break;
     
+    case 3:
+    {
+        clear();
+
+        if(!*isValM || !*isValN){
+            printw("Не введены размеры поля\n");
+            printw("\nДля выхода вглавное меню нажмите любую кнопку\n");
+            getch();
+            break;
+        }
+
+        const int sizeX = *valN;
+        const int sizeY = *valM;
+
+        // spiral Array
+        int **spiral = (int **)malloc(sizeX * sizeof(int *));
+        for (int i = 0; i < sizeX; i++) {
+            spiral[i] = (int *)malloc(sizeY * sizeof(int));
+        }
+        // Инициализация массива
+        for (int i = 0; i < sizeX; i++) {
+            for (int j = 0; j < sizeY; j++) {
+                spiral[i][j] = -1; // Присваиваем -1 всем элементам
+            }
+        }
+
+        int x = 0, y = 0;
+        int it = 0;
+        spiral[x][y] = ++it;
+        while(it < sizeX*sizeY){
+            // Идём до упора на право
+            while(y < sizeY-1 && spiral[x][y+1] == -1){
+                spiral[x][y+1] = ++it;
+                ++y;
+            }
+
+            // До упора в низ
+            while(x < sizeX-1 && spiral[x+1][y] == -1){
+                spiral[x+1][y] = ++it;
+                ++x;
+            }
+
+            // До упора в лево
+            while(y > 0 && spiral[x][y-1] == -1){
+                spiral[x][y-1] = ++it;
+                --y;
+            }
+
+            // До упора на верх
+            while(x > 0 && spiral[x-1][y] == -1){
+                spiral[x-1][y] = ++it;
+                --x;
+            }
+        }
+        
+        for(int i = 0; i < sizeX; i++){
+            for(int j = 0; j < sizeY; j++){
+                printw(" %3d ", spiral[i][j]);
+            }
+            printw("\n");
+        }
+
+        printw("\nДля выхода вглавное меню нажмите любую кнопку\n");
+
+        getch();
+        break;
+    }
+    
+    case 4:
+    {
+        clear();
+
+        if(!*isValM || !*isValN){
+            printw("Не введены размеры поля\n");
+            printw("\nДля выхода вглавное меню нажмите любую кнопку\n");
+            getch();
+            break;
+        }
+
+        const int sizeX = *valN;
+        const int sizeY = *valM;
+
+        // spiral Array
+        int **spiral = (int **)malloc(sizeX * sizeof(int *));
+        for (int i = 0; i < sizeX; i++) {
+            spiral[i] = (int *)malloc(sizeY * sizeof(int));
+        }
+        // Инициализация массива
+        for (int i = 0; i < sizeX; i++) {
+            for (int j = 0; j < sizeY; j++) {
+                spiral[i][j] = -1; // Присваиваем -1 всем элементам
+            }
+        }
+
+        int x = 0, y = 0;
+        int it = 0;
+        spiral[x][y] = ++it;
+        while(it < sizeX*sizeY){
+            // До упора в низ
+            while(x < sizeX-1 && spiral[x+1][y] == -1){
+                spiral[x+1][y] = ++it;
+                ++x;
+            }
+
+            // Идём до упора на право
+            while(y < sizeY-1 && spiral[x][y+1] == -1){
+                spiral[x][y+1] = ++it;
+                ++y;
+            }
+            
+            // До упора на верх
+            while(x > 0 && spiral[x-1][y] == -1){
+                spiral[x-1][y] = ++it;
+                --x;
+            }
+
+            // До упора в лево
+            while(y > 0 && spiral[x][y-1] == -1){
+                spiral[x][y-1] = ++it;
+                --y;
+            }
+        }
+        
+        for(int i = 0; i < sizeX; i++){
+            for(int j = 0; j < sizeY; j++){
+                printw(" %3d ", spiral[i][j]);
+            }
+            printw("\n");
+        }
+
+        printw("\nДля выхода вглавное меню нажмите любую кнопку\n");
+
+        getch();
+        
+        break;
+    }
+        
+    case 6:
+    {
+        clear();
+
+        if(!*isValM || !*isValN){
+            printw("Не введены размеры поля\n");
+            printw("\nДля выхода вглавное меню нажмите любую кнопку\n");
+            getch();
+            break;
+        }
+
+        const int sizeX = *valN;
+        const int sizeY = *valM;
+
+        // spiral Array
+        int **spiral = (int **)malloc(sizeX * sizeof(int *));
+        for (int i = 0; i < sizeX; i++) {
+            spiral[i] = (int *)malloc(sizeY * sizeof(int));
+        }
+        // Инициализация массива
+        for (int i = 0; i < sizeX; i++) {
+            for (int j = 0; j < sizeY; j++) {
+                spiral[i][j] = -1; // Присваиваем -1 всем элементам
+            }
+        }
+
+        int x = 0, y = 0;
+        int it = 0;
+        spiral[x][y] = ++it;
+        while(it < sizeX*sizeY){
+            // Идём до упора на право
+            while(y < sizeY-1 && spiral[x][y+1] == -1){
+                spiral[x][y+1] = ++it;
+                ++y;
+            }
+
+            // До упора в низ
+            while(x < sizeX-1 && spiral[x+1][y] == -1){
+                spiral[x+1][y] = ++it;
+                ++x;
+            }
+
+            // До упора в лево
+            while(y > 0 && spiral[x][y-1] == -1){
+                spiral[x][y-1] = ++it;
+                --y;
+            }
+
+            // До упора на верх
+            while(x > 0 && spiral[x-1][y] == -1){
+                spiral[x-1][y] = ++it;
+                --x;
+            }
+        }
+        
+        for(int i = 0; i < sizeX; i++){
+            for(int j = 0; j < sizeY; j++){
+                printw(" %3d ", abs(spiral[i][j]-sizeX*sizeY)+1);
+            }
+            printw("\n");
+        }
+
+        printw("\nДля выхода вглавное меню нажмите любую кнопку\n");
+
+        getch();
+        break;
+    }
+
+    case 5:
+    {
+        clear();
+
+        if(!*isValM || !*isValN){
+            printw("Не введены размеры поля\n");
+            printw("\nДля выхода вглавное меню нажмите любую кнопку\n");
+            getch();
+            break;
+        }
+
+        const int sizeX = *valN;
+        const int sizeY = *valM;
+
+        // spiral Array
+        int **spiral = (int **)malloc(sizeX * sizeof(int *));
+        for (int i = 0; i < sizeX; i++) {
+            spiral[i] = (int *)malloc(sizeY * sizeof(int));
+        }
+        // Инициализация массива
+        for (int i = 0; i < sizeX; i++) {
+            for (int j = 0; j < sizeY; j++) {
+                spiral[i][j] = -1; // Присваиваем -1 всем элементам
+            }
+        }
+
+        int x = 0, y = 0;
+        int it = 0;
+        spiral[x][y] = ++it;
+        while(it < sizeX*sizeY){
+            // До упора в низ
+            while(x < sizeX-1 && spiral[x+1][y] == -1){
+                spiral[x+1][y] = ++it;
+                ++x;
+            }
+
+            // Идём до упора на право
+            while(y < sizeY-1 && spiral[x][y+1] == -1){
+                spiral[x][y+1] = ++it;
+                ++y;
+            }
+            
+            // До упора на верх
+            while(x > 0 && spiral[x-1][y] == -1){
+                spiral[x-1][y] = ++it;
+                --x;
+            }
+
+            // До упора в лево
+            while(y > 0 && spiral[x][y-1] == -1){
+                spiral[x][y-1] = ++it;
+                --y;
+            }
+        }
+        
+        for(int i = 0; i < sizeX; i++){
+            for(int j = 0; j < sizeY; j++){
+                printw(" %3d ", abs(spiral[i][j]-sizeX*sizeY)+1);
+            }
+            printw("\n");
+        }
+
+        printw("\nДля выхода вглавное меню нажмите любую кнопку\n");
+
+        getch();
+        
+        break;
+    }
+
     default:
         break;
     }
@@ -162,10 +439,6 @@ int main(){
 
         clear();
     }
-
-    clear();
-    printw("Всё");
-    getch();
 
     endwin();
     return 0;
